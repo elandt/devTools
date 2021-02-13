@@ -8,6 +8,7 @@ class Dog:
     def speak(self):
         return "Woof!"
 
+
 class Cat:
 
     """A simple dog class"""
@@ -18,6 +19,7 @@ class Cat:
     def speak(self):
         return "Meow!"
 
+
 def get_pet(pet="dog"):
 
     """The factory method"""
@@ -26,6 +28,7 @@ def get_pet(pet="dog"):
 
     return pets[pet]
 
+
 d = get_pet("dog")
 
 print(d.speak())
@@ -33,9 +36,3 @@ print(d.speak())
 c = get_pet("cat")
 
 print(c.speak())
-
-
-
-
-
-
