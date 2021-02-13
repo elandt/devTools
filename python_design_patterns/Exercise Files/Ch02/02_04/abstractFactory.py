@@ -1,41 +1,41 @@
 class Dog:
-	"""One of the objects to be returned"""
+    """One of the objects to be returned"""
 
-	def speak(self):
-		return "Woof!"
+    def speak(self):
+        return "Woof!"
 
-	def __str__(self):
-		return "Dog"
+    def __str__(self):
+        return "Dog"
 
 
 class DogFactory:
-	"""Concrete Factory"""
+    """Concrete Factory"""
 
-	def get_pet(self):
-		
+    def get_pet(self):
 
-	
-	def get_food(self):
-		
+
+
+    def get_food(self):
+
 
 
 
 class PetStore:
-	""" PetStore houses our Abstract Factory """
+    """ PetStore houses our Abstract Factory """
 
-	def __init__(self, pet_factory=None):
-		""" pet_factory is our Abstract Factory """
-
-
-
-	def show_pet(self):
-		""" Utility method to display the details of the objects retured by the DogFactory """
+    def __init__(self, pet_factory=None):
+        """ pet_factory is our Abstract Factory """
 
 
-		
-		print("Our pet is '{}'!".format(pet))
-		print("Our pet says hello by '{}'".format(pet.speak()))
-		print("Its food is '{}'!".format(pet_food))
+
+    def show_pet(self):
+        """ Utility method to display the details of the objects retured by the DogFactory """
+
+
+
+        print("Our pet is '{}'!".format(pet))
+        print("Our pet says hello by '{}'".format(pet.speak()))
+        print("Its food is '{}'!".format(pet_food))
 
 
 #Create a Concrete Factory

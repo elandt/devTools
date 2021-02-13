@@ -1,30 +1,30 @@
 class Dog:
 
-	"""A simple dog class"""
+    """A simple dog class"""
 
-	def __init__(self, name):
-		self._name = name
+    def __init__(self, name):
+        self._name = name
 
-	def speak(self):
-		return "Woof!"
+    def speak(self):
+        return "Woof!"
 
 class Cat:
 
-	"""A simple dog class"""
+    """A simple dog class"""
 
-	def __init__(self, name):
-		self._name = name
+    def __init__(self, name):
+        self._name = name
 
-	def speak(self):
-		return "Meow!"
+    def speak(self):
+        return "Meow!"
 
 def get_pet(pet="dog"):
 
-	"""The factory method"""
+    """The factory method"""
 
-	pets = dict(dog=Dog("Hope"), cat=Cat("Peace"))
+    pets = dict(dog=Dog("Hope"), cat=Cat("Peace"))
 
-	return pets[pet]
+    return pets[pet]
 
 d = get_pet("dog")
 
