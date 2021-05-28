@@ -1,39 +1,50 @@
-import types #Import the types module
+# Import the types module - supports dynamic creation of new types
+import types
+
 
 class Strategy:
     """The Strategy Pattern class"""
-    
+
     def __init__(self, function=None):
         self.name = "Default Strategy"
-        
-        #If a reference to a function is provided, replace the execute() method with the given function
-        
-            
-    def execute(self): #This gets replaced by another version if another strategy is provided.
+
+        # If a reference to a function is provided, replace the execute()
+        # method with the given function
+        if function:
+            self.execute = types.MethodType(function, self)
+
+    # This gets replaced by another version if another strategy is provided.
+    def execute(self):
         """The defaut method that prints the name of the strategy being used"""
-        print("{} is used!".format(self.name))
+        print(f"{self.name} is used!")
 
-#Replacement method 1
+
+# Replacement method 1
 def strategy_one(self):
-    print("{} is used to execute method 1".format(self.name))
+    print(f"{self.name} is used to execute method 1")
 
-#Replacement method 2    
+
+# Replacement method 2
 def strategy_two(self):
-	
-    
-#Let's create our default strategy
-s0 = 
-#Let's execute our default strategy
+    print(f"{self.name} is used to execute method 2")
+
+
+# Let's create our default strategy
+s0 = Strategy()
+
+# Let's execute our default strategy
 s0.execute()
 
-#Let's create the first varition of our default strategy by providing a new behavior
-s1 = 
-#Let's set its name
-s1.name = 
-#Let's execute the strategy
-s1.
+# Let's create the first varition of our default strategy by
+# providing a new behavior
+s1 = Strategy(strategy_one)
 
-s2 = 
-s2.name = 
-s2.
+# Let's set its name
+s1.name = "Strategy One"
 
+# Let's execute the strategy
+s1.execute()
+
+s2 = Strategy(strategy_two)
+s2.name = "Strategy Two"
+s2.execute()
