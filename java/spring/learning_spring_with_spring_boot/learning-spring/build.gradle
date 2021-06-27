@@ -1,0 +1,31 @@
+plugins {
+	// Does this set the version of all Spring Boot dependencies to 2.5.0?
+	id 'org.springframework.boot' version '2.5.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+sourceCompatibility = project.getProperty('javaVersion')
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Templating engine
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// Spring dependencies for a web based app
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Spring dependecies for working with databases via JPA/hibernate
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// The embedded database being used in this project
+	implementation 'com.h2database:h2'
+	// For using Postgres as a remote db rather than an embedded h2 db
+	// implementation 'org.postgresql:postgresql'
+	// Testing things for Spring
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

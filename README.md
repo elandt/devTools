@@ -8,3 +8,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Learning the Python 3 Standard Library](https://www.linkedin.com/learning/learning-the-python-3-standard-library) - 11/9/2019
 * [Learning Python](https://www.linkedin.com/learning/learning-python-2/) - 5/1/2020
 * [Python: Design Patterns](https://www.linkedin.com/learning/python-design-patterns) - 5/28/2021
+* [Learning Spring with Spring Boot](https://www.linkedin.com/learning/learning-spring-with-spring-boot-2) - 6/27/2021
