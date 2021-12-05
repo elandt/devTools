@@ -10,3 +10,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Python: Design Patterns](https://www.linkedin.com/learning/python-design-patterns) - 5/28/2021
 * [Learning Spring with Spring Boot](https://www.linkedin.com/learning/learning-spring-with-spring-boot-2) - 6/27/2021
 * [Design Patterns: Creational](https://www.linkedin.com/learning/design-patterns-creational) - 9/19/2021
+* [Programming Foundations: Design Patterns](https://www.linkedin.com/learning/programming-foundations-design-patterns-2) - 12/5/2021
