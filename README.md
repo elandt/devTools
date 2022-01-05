@@ -11,3 +11,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Learning Spring with Spring Boot](https://www.linkedin.com/learning/learning-spring-with-spring-boot-2) - 6/27/2021
 * [Design Patterns: Creational](https://www.linkedin.com/learning/design-patterns-creational) - 9/19/2021
 * [Programming Foundations: Design Patterns](https://www.linkedin.com/learning/programming-foundations-design-patterns-2) - 12/5/2021
+* [Spring Boot 2.0 Essential Training](https://www.linkedin.com/learning/spring-boot-2-0-essential-training-2) - 1/5/2022
