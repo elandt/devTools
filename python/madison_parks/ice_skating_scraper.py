@@ -18,7 +18,6 @@ def main():
             print(facility.find_next(name="div", attrs={"class": "mainStatus"}).text.strip())
             # print(facility.find_previous(name="u").text)
             # print(facility.text)
-            pass
     else:
         print("No facilities found")
 
