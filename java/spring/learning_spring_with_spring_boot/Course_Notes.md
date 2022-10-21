@@ -6,13 +6,13 @@
   * Plain old Java object
   * Not simply an object with _only_ getters and setters
   * Objects that have both state and behavior
-* JavaBeans
+* Java Beans
   * Objects with only getters and setters
 * Spring beans ("Bean" throughout the course)
   * POJOs configured in the application context
 * DTO
   * Data Transport Object
-  * Object (often a JavaBean) used to move state between layers
+  * Object (often a Java Bean) used to move state between layers
 
 ## Inversion of Control (IoC)
 
