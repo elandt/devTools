@@ -1,15 +1,13 @@
 package com.elandt.lil.sbet.landon.roomwebapp.async;
 
-import com.elandt.lil.sbet.landon.roomwebapp.models.Room;
-import com.elandt.lil.sbet.landon.roomwebapp.service.RoomService;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.elandt.lil.sbet.landon.roomwebapp.models.Room;
+import com.elandt.lil.sbet.landon.roomwebapp.service.RoomService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class RoomCleanerListener {
@@ -33,11 +31,7 @@ public class RoomCleanerListener {
             } else {
                 LOGGER.warn("Unknown model type");
             }
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            LOGGER.error(e.getMessage(), e);
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
+        } catch (JsonProcessingException e) {  
             LOGGER.error(e.getMessage(), e);
         }
     }
