@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+}
+
+group = 'com.elandt.lil.ec'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// No longer appears to be included with spring-boot-starter-web like it was in version 2.2.0.RELEASE used by in the course videos
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// Spring Framework
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer:3.7.5'
+	// Other
+	runtimeOnly 'com.h2database:h2'
+	// Test only
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
