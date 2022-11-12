@@ -9,10 +9,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.elandt.lil.ec.domain.TourRating;
-import com.elandt.lil.ec.domain.TourRatingPk;
 
 @RepositoryRestResource(exported = false)
-public interface TourRatingRepository extends CrudRepository<TourRating, TourRatingPk> {
+public interface TourRatingRepository extends CrudRepository<TourRating, String> {
 
     /**
      * Lookup all the TourRatings for a tour.
@@ -20,23 +19,23 @@ public interface TourRatingRepository extends CrudRepository<TourRating, TourRat
      * @param tourId - the tour identifier
      * @return a List of any found TourRatings
      */
-    List<TourRating> findByPkTourId(Integer tourId);
+    List<TourRating> findByTourId(String tourId);
 
     /**
      * Lookup all the TourRatings for a tour.
      *
      * @param tourId - the tour identifier
      * @param pageable - the page of TourRatings to return
-     * @return
+     * @return Page of TourRatings
      */
-    Page<TourRating> findByPkTourId(Integer tourId, Pageable pageable);
+    Page<TourRating> findByTourId(String tourId, Pageable pageable);
 
     /**
      * Lookup a TourRating by the Tour ID and Customer ID
      *
-     * @param tourId tour identifier
-     * @param customerId customer identifier
+     * @param tourId - the tour identifier
+     * @param customerId - the customer identifier
      * @return Optional of found TourRatings
      */
-    Optional<TourRating> findByPkTourIdAndPkCustomerId(Integer tourId, Integer customerId);
+    Optional<TourRating> findByTourIdAndCustomerId(String tourId, Integer customerId);
 }

@@ -2,38 +2,46 @@ package com.elandt.lil.ec.domain;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class TourRating {
 
-    @EmbeddedId
-    private TourRatingPk pk;
+    @Id
+    private String id;
 
-    @Column(nullable = false)
+    private String tourId;
+
+    @NotNull
+    private Integer customerId;
+
+    @Min(0)
+    @Max(5)
     private Integer score;
 
-    @Column
+    @Size(max = 255)
     private String comment;
 
     public TourRating() {
         // Default constructor
     }
 
-    public TourRating(TourRatingPk pk, Integer score, String comment) {
-        this.pk = pk;
+    public TourRating(String tourId, @NotNull Integer customerId, @Min(0) @Max(5) Integer score,
+            @Size(max = 255) String comment) {
+        this.tourId = tourId;
+        this.customerId = customerId;
         this.score = score;
         this.comment = comment;
     }
 
-    public TourRatingPk getPk() {
-        return pk;
-    }
-
-    public void setPk(TourRatingPk pk) {
-        this.pk = pk;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
     public Integer getScore() {
@@ -55,28 +63,28 @@ public class TourRating {
     @Override
     public String toString() {
         return "TourRating{" +
-                "pk=" + pk +
+                "id='" + id + '\'' +
+                ", tourId='" + tourId + '\'' +
+                ", customerId=" + customerId +
                 ", score=" + score +
                 ", comment='" + comment + '\'' +
                 '}';
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        TourRating other = (TourRating) obj;
-        return Objects.equals(pk, other.pk)
-                && Objects.equals(score, other.score)
-                && Objects.equals(comment, other.comment);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TourRating that = (TourRating) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(tourId, that.tourId) &&
+                Objects.equals(customerId, that.customerId) &&
+                Objects.equals(score, that.score) &&
+                Objects.equals(comment, that.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pk, score, comment);
+        return Objects.hash(id, tourId, customerId, score, comment);
     }
 }

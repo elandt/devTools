@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
 	// Spring Boot
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// No longer appears to be included with spring-boot-starter-web like it was in version 2.2.0.RELEASE used by in the course videos
@@ -22,7 +22,7 @@ dependencies {
 	// Spring Framework
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer:3.7.5'
 	// Other
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.2'
 	// Test only
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
