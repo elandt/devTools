@@ -107,10 +107,6 @@ public class ExplorecaliApplication implements CommandLineRunner {
                     readValue(new FileInputStream(fileToImport), new TypeReference<List<TourFromFile>>() {});
         }
 
-		protected TourFromFile() {
-			// Default constructor
-		}
-
 		public String getPackageType() {
 			return packageType;
 		}

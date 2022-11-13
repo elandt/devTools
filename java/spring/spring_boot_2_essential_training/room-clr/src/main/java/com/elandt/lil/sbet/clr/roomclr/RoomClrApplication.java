@@ -28,7 +28,7 @@ public class RoomClrApplication {
 		return args -> {
 			LOGGER.info("Starting CLR application");
 
-			ResponseEntity<List<Room>> rooms = restTemplate.exchange("http://localhost:8080/api/rooms", HttpMethod.GET, null, new ParameterizedTypeReference<List<Room>>() { 
+			ResponseEntity<List<Room>> rooms = restTemplate.exchange("http://localhost:8080/api/rooms", HttpMethod.GET, null, new ParameterizedTypeReference<List<Room>>() {
 			});
 			rooms.getBody().forEach(room -> {
 				LOGGER.info(room.toString());
