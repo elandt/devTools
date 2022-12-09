@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.6'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+}
+
+group = 'com.elandt.lil.ec'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Assumes all APIs are forbidden and protected, and that the auth scheme will be form-based with each use having a servlet session - can be overridden
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// No longer appears to be included with spring-boot-starter-web like it was in version 2.3.0.RELEASE used in the course videos
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Spring Framework
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer:3.7.5'
+
+	// Swagger/API Documentation (Gives a basic Swagger UI page ootb, but can be enhanced with annotations)
+	// Springfox is another Swagger-based library for API documentation
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.13'
+	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.13'
+
+	// JSON Web Token support
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	// Other
+	runtimeOnly 'com.h2database:h2'
+
+	// Test only
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// Needed for testing the PATCH endpoint(s)
+	testImplementation 'org.apache.httpcomponents:httpclient'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

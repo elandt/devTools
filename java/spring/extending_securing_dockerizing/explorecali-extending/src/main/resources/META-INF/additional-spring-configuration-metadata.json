@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "name": "security.jwt.token.secret-key",
+            "type": "java.lang.String",
+            "description": "The secret key for generating JSON Web Tokens"
+        },
+        {
+            "name": "security.jwt.token.expiration",
+            "type": "java.lang.String",
+            "description": "The duration that a JSON Web Token is valid for"
+        }
+    ]
+}
