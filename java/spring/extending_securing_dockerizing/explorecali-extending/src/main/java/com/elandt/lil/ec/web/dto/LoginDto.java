@@ -2,6 +2,10 @@ package com.elandt.lil.ec.web.dto;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO for login and signup requests
+ *
+ */
 public class LoginDto {
 
     @NotNull
@@ -19,7 +23,7 @@ public class LoginDto {
     }
 
     /**
-     * Full constructor
+     * Partial constructor - used for signup and login requests
      *
      * @param username username of the user attempting to login
      * @param password password of the user attempting to login
@@ -27,6 +31,20 @@ public class LoginDto {
     public LoginDto(@NotNull String username, @NotNull String password) {
         this.username = username;
         this.password = password;
+    }
+
+    /**
+     * Full constructor - used for signup requests
+     *
+     * @param username username of the user attempting to signup
+     * @param password password of the user attempting to signup
+     * @param firstName first name of the user attempting to signup
+     * @param lastName last name of the user attempting to signup
+     */
+    public LoginDto(String username, String password, String firstName, String lastName) {
+       this(username, password);
+       this.firstName = firstName;
+       this.lastName = lastName;
     }
 
     public String getUsername() {
