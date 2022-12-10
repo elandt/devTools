@@ -33,7 +33,10 @@ dependencies {
 	// JSON Web Token support
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
-	// Other
+	// Database
+	implementation 'mysql:mysql-connector-java'
+	implementation 'org.flywaydb:flyway-mysql'
+	implementation 'org.flywaydb:flyway-core'
 	runtimeOnly 'com.h2database:h2'
 
 	// Test only

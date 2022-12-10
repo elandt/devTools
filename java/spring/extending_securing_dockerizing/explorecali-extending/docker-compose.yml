@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ec-db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: explorecali
+      MYSQL_USER: cali_user
+      MYSQL_PASSWORD: cali_pass
+    ports:
+      - "6604:3306"
