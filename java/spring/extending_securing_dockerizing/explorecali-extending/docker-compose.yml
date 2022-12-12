@@ -1,8 +1,55 @@
 version: '3.8'
 
+# The 3 ec-app-* services are purely for demonstration, each using a different Spring Profile. Normally, you'd only have/need one.
+
+# Environment variable SPRING_PROFILES_ACTIVE defines the profile to use - setting to 'mysql' or 'docker' activates
+# the mysql/docker profile, loading the properties from application-mysql.properties or application-docker.properties,
+# respectively (this value could be set as a JVM arg in the Dockerfile).
+
 services:
+  ec-app-default:
+    build: .
+    container_name: ec-app-default
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+    ports:
+      - "8080:8080"
+    volumes:
+      - "../db/migration:/var/db/migration:ro"
+
+  ec-app-mysql:
+    build: .
+    container_name: ec-app-mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+    ports:
+      - "8181:8080"
+    depends_on:
+      - ec-db
+    volumes:
+      - "../db/migration:/var/db/migration:ro"
+    # Need to sort out start-up delay so that ec-app doesn't crash because ec-db isn't ready yet
+
+  ec-app-docker:
+    build: .
+    container_name: ec-app-docker
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER: ec-mysql
+      PORT: 3306
+      DBUSER: cali_user
+      DBPASSWORD: cali_pass
+    ports:
+      - "8282:8080"
+    depends_on:
+      - ec-db
+    volumes:
+      - "../db/migration:/var/db/migration:ro"
+    # Need to sort out start-up delay so that ec-app doesn't crash because ec-db isn't ready yet
+
   ec-db:
     image: mysql
+    container_name: ec-mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: explorecali

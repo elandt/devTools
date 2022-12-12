@@ -47,10 +47,9 @@ public class WebSecurityConfiguration {
     public WebSecurityCustomizer webSecurityCustomizer() {
         // Allow swagger to be accessed without authentication
         return (webSecurity) -> webSecurity.ignoring()
-                .antMatchers("/v2/api-docs")
+                .antMatchers("/v3/api-docs/**")
                 .antMatchers("/swagger-resources/**")
-                .antMatchers("/swagger-ui.html")
-                .antMatchers("/configuration/**")
+                .antMatchers("/swagger-ui/**")
                 .antMatchers("/webjars/**")
                 .antMatchers("/public");
     }
