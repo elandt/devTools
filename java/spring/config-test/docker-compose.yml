@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  config-test-app-default:
+    build: .
+    container_name: config-test-default
+    environment:
+      APP_ENVIRONMENT: default
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./db/migration:/var/db/migration:ro"
+
+  config-test-app-docker:
+    build: .
+    container_name: config-test-app-docker
+    environment:
+      APP_ENVIRONMENT: docker
+      SERVER: config-test-mysql
+      PORT: 3306
+      ADDITIONAL_PROPERTIES_PATH: /usr/local
+    ports:
+      - "8181:8080"
+    volumes:
+      - "../../../config-test/greeting.properties:/usr/local/greeting.properties:ro"
+      - "../../../config-test/db.properties:/usr/local/db.properties:ro"
+      - "./db/migration:/var/db/migration:ro"
+    depends_on:
+      - config-test-db
+
+  config-test-db:
+    image: mysql
+    container_name: config-test-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: demo
+      MYSQL_USER: demo_user
+      MYSQL_PASSWORD: demo_pass
+    ports:
+      - "6604:3306"
