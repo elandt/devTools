@@ -31,15 +31,15 @@ public class WebSecurityConfiguration {
         httpSecurity.authorizeHttpRequests(authorize ->
                 // Open the packages, tours, ratings, and signin APIs
                 authorize.antMatchers("/packages/**").permitAll()
-                .antMatchers("/tours/**").permitAll()
-                .antMatchers("/ratings/**").permitAll()
-                .antMatchers("/users/signin").permitAll()
-                // Require auth for everything else
-                .anyRequest().authenticated())
+                        .antMatchers("/tours/**").permitAll()
+                        .antMatchers("/ratings/**").permitAll()
+                        .antMatchers("/users/signin").permitAll()
+                        // Require auth for everything else
+                        .anyRequest().authenticated())
                 .authenticationManager(authenticationManager())
-                .csrf().disable()
+                .csrf(csrf -> csrf.disable())
                 .addFilterBefore(new JwtFilter(userDetailsService), UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return httpSecurity.build();
     }
 
