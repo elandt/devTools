@@ -1,46 +1,34 @@
 package com.elandt.lil.university.business;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 
-import com.elandt.lil.university.dao.CourseDao;
 import com.elandt.lil.university.domain.Course;
+import com.elandt.lil.university.repo.CourseRepo;
+
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class DynamicQueryService {
 
-    private CourseDao courseDao;
+    private final CourseRepo courseRepo;
 
-    private EntityManagerFactory emf;
-
-    private EntityManager em;
-
-    public DynamicQueryService(CourseDao courseDao, EntityManagerFactory emf) {
-        this.courseDao = courseDao;
-        this.em = emf.createEntityManager();
+    public List<Course> filterBySpecification(CourseFilter courseFilter) {
+        return courseRepo.findAll(courseFilter.getSpecification());
     }
 
-    public List<Course> findCoursesByCriteria(CourseFilter filter) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
-        Root<Course> root = cq.from(Course.class);
-        List<Predicate> predicates = new ArrayList<>();
-        filter.getDepartment().ifPresent(d ->
-                predicates.add(cb.equal(root.get("department"), d)));
-        filter.getCredits().ifPresent(c ->
-                predicates.add(cb.equal(root.get("credits"), c)));
-        filter.getInstructor().ifPresent(i ->
-                predicates.add(cb.equal(root.get("instructor"), i)));
-        cq.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
-        return courseDao.findByCriteria(cq);
+    public List<Course> filterByExample(CourseFilter courseFilter) {
+        return courseRepo.findAll(courseFilter.getExample());
     }
+
+    // Related to Querydsl dynamic query example
+    // private final CourseQueryDslRepo courseQueryDslRepo;
+
+    // public List<Course> filterByQueryDsl(CourseFilter courseFilter) {
+    //     var courses = new ArrayList<Course>();
+    //     courseQueryDslRepo.findAll().forEach(courses::add);
+    //     return courses;
+    // }
 }

@@ -1,12 +1,11 @@
 package com.elandt.lil.university.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import java.util.Objects;
 
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Embeddable first and last name object to reduce code duplication
@@ -14,8 +13,6 @@ import lombok.ToString;
 @Embeddable
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public class Person {
 
     @Column
@@ -30,5 +27,25 @@ public class Person {
     }
 
     protected Person() {
+    }
+
+    @Override
+    public String toString() {
+        return  " firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + "\' ";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }

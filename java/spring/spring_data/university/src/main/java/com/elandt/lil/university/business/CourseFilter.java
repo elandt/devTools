@@ -1,9 +1,16 @@
 package com.elandt.lil.university.business;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.domain.Specification;
+
+import com.elandt.lil.university.domain.Course;
 import com.elandt.lil.university.domain.Department;
 import com.elandt.lil.university.domain.Staff;
+
+import jakarta.persistence.criteria.Predicate;
 
 /**
  * Helper class to filter courses in the Dynamic Query Service
@@ -43,4 +50,35 @@ public class CourseFilter {
     public Optional<Staff> getInstructor() {
         return instructor;
     }
+
+    public Specification<Course> getSpecification() {
+        return (root, query, criteriaBuilder) -> {
+            var predicates = new ArrayList<Predicate>();
+            department.ifPresent(d -> predicates.add(criteriaBuilder.equal(root.get("department"), d)));
+            credits.ifPresent(c -> predicates.add(criteriaBuilder.equal(root.get("credits"), c)));
+            instructor.ifPresent(i -> predicates.add(criteriaBuilder.equal(root.get("instructor"), i)));
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+    public Example<Course> getExample() {
+        // Create the probe
+        var course = new Course(null,
+                credits.orElse(null),
+                instructor.orElse(null),
+                department.orElse(null));
+        // Return the Example created from the probe
+        return Example.of(course);
+    }
+
+    // Related to Querydsl dynamic query example
+    // public com.querydsl.core.types.Predicate getQueryDslPredicate() {
+    //     var predicate = new BooleanBuilder();
+
+    //     department.ifPresent(d -> predicate.and(course.department.eq(d)));
+    //     credits.ifPresent(c -> predicate.and(course.credits.eq(c)));
+    //     instructor.ifPresent(i -> predicate.and(course.instructor.eq(i)));
+
+    //     return predicate;
+    // }
 }

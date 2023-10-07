@@ -2,6 +2,7 @@ package com.elandt.lil.university.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
 /**
  * Course offered at the University
@@ -21,8 +20,6 @@ import lombok.ToString;
 @Entity
 @Table
 @Getter
-@ToString
-@EqualsAndHashCode
 public class Course {
 
     @Id
@@ -57,5 +54,29 @@ public class Course {
     public Course addPrerequisite(Course prerequisite){
         prerequisites.add(prerequisite);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", credits=" + credits +
+                ", instructor=" + instructor +
+                ", department=" + department.getName() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id.equals(course.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

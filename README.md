@@ -17,4 +17,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Creating Your First Spring Boot Microservice](https://www.linkedin.com/learning/creating-your-first-spring-boot-microservice) - 11/12/2022
 * [Extending, Securing, and Dockerizing Spring Boot Microservices](https://www.linkedin.com/learning/extending-securing-and-dockerizing-spring-boot-microservices/elevate-a-microservice) - 12/12/2022
 * [Spring: Spring Security](https://www.linkedin.com/learning/spring-spring-security-15832928) - 9/22/2023
-* [Spring Data](https://www.linkedin.com/learning/spring-data/diving-into-spring-data) -
+* [Spring Data](https://www.linkedin.com/learning/spring-data/diving-into-spring-data) - 10/7/2023

@@ -1,14 +1,13 @@
 package com.elandt.lil.university.domain;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Objects;
 
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.ToString;
 
 
 /**
@@ -17,8 +16,6 @@ import lombok.ToString;
 @Entity
 @Table
 @Getter
-@ToString
-@EqualsAndHashCode
 public class Staff {
 
     @Id
@@ -33,5 +30,26 @@ public class Staff {
     }
 
     protected Staff() {
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", member=" + member +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Staff staff = (Staff) o;
+        return id.equals(staff.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

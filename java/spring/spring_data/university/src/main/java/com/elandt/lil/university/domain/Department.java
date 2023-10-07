@@ -2,6 +2,7 @@ package com.elandt.lil.university.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Department of the University
@@ -22,8 +21,6 @@ import lombok.ToString;
 @Table
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public class Department {
 
     @Id
@@ -49,5 +46,27 @@ public class Department {
 
     public void addCourse(Course course) {
         courses.add(course);
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "chair=" + chair +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
