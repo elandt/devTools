@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Flash Card App</title>
+    </head>
+    <body>
+
+        <div id="app">
+            <h1>Deck Settings</h1>
+
+            <form method="post" action="">
+                <div>
+                    <label for="name">Name: </label>
+                    <!-- Adding `.trim` will automatically trim leading and trailing whitespace -->
+                    <input v-model.trim="deckName" type="text" id="name" name="name"> ({{ deckName.length }} characters)
+                </div>
+
+                <div>
+                    <label for="description">Description: </label>
+                    <!-- Adding `.lazy` changes from updating the model on each keystroke to
+                        only occur when focus shifts away from the element -->
+                    <textarea v-model.lazy="deckDescription" id="description" name="description"></textarea>
+                    ({{ charsLeft }} left)
+                </div>
+
+                <div class="options">
+                    <div>
+                        <input v-model="options" true-value="on"  false-value="off" type="checkbox" id="reverse" value="reverse">
+                        <label for="reverse">Include reverse cards</label>
+                    </div>
+
+                    <div>
+                        <input v-model="options" type="checkbox" id="time_limit" value="time_limit">
+                        <label for="time_limit">Use time limit</label>
+                    </div>
+
+                    <div>
+                        <input v-model="options" type="checkbox" id="reminders" value="reminders">
+                        <label for="reminders">Enable reminders</label>
+                    </div>
+
+                    <fieldset class="leech-action">
+                        <legend>Leech action</legend>
+                        <div>
+                            <input v-model="leech" type="radio" id="tag" name="leech" value="tag">
+                            <label for="tag">Tag</label>
+                        </div>
+                        <div>
+                            <input v-model="leech" type="radio" id="suspend" name="leech" value="suspend">
+                            <label for="suspend">Suspend</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="category">
+                    <label for="category">Category:</label>
+                    <!-- Adding `.number` will automatically cast the value string to a number  -->
+                    <select v-model.number="categoryId" name="category" id="category">
+                        <option value="">Select</option>
+                        <option value="2">Foreign Language</option>
+                        <option value="3">History</option>
+                        <option value="3">Biology</option>
+                        <option value="4">Geography</option>
+                        <option value="5">Law</option>
+                        <option value="6">Programming</option>
+                    </select>
+                </div>
+
+                <!-- Adding `.prevent` changes from default behavior of submitting the form on click -->
+                <button @click.prevent="submit" type="submit">Create</button>
+            </form>
+        </div>
+
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: 'Vue.js Fundamentals',
+                        deckDescription: 'Core concepts and directives for working with Vue.js',
+                        /* Using an array rather than named properties for the checkboxes results in the ids of
+                         * checked items being added/removed to/from the array. This does NOT have a set order,
+                         * i.e. if you check multiple boxes, then uncheck one in the middle, the ids after it
+                         * shift forward, and if you recheck that box its id is added to the end of the array
+                         */
+                        options: [],
+                        leech: 'tag',
+                        categoryId: ''
+                    };
+                },
+                computed: {
+                    charsLeft() {
+                        return 200 - this.deckDescription.length;
+                    }
+                },
+                methods: {
+                    submit() {
+                        alert('submitting')
+                    }
+                }
+            };
+
+            const app = Vue.createApp(FlashCardApp).mount('#app');
+        </script>
+    </body>
+</html>

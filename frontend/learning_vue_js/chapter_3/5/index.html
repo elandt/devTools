@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Flash Card App</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-text="deckName"></h1>
+
+            <!-- Can add additional dynaminc style classes with `:class` binding -->
+            <div @click="flipped = !flipped" :class="{again: isRepeat}" class="card">
+                <h2 v-if="!flipped" v-text="front"></h2>
+                <div v-else>
+                    <div v-html="back"></div>
+                    <div class="score">
+                        <button @click.stop="gotIt">GOT IT</button>
+                        <button @click.stop="again">AGAIN</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button @click="move(-1)" type="button">&#8592;</button>
+
+                <button @click="move(1)" type="button">&#8594;</button>
+            </div>
+
+            <a :href="readMoreUrl">Read more</a>
+        </div>
+
+        <script src="data.js"></script>
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: 'Vue.js Fundamentals',
+                        cards,
+                        index: 0,
+                        flipped: false,
+                        readMoreUrl: 'https://v3.vuejs.org/guide'
+                    };
+                },
+                methods: {
+                    move(change) {
+                        // Rather than stopping at the bounds of the collection of cards:
+                        // Update the index
+                        // Then check against the bounds of the collection, and wrap accordingly, if necessary
+                        this.index += change;
+                        if (0 > this.index) {
+                            this.index = this.cards.length - 1;
+                        } else if (this.index > this.cards.length - 1) {
+                            this.index = 0;
+                        }
+                        this.flipped = false;
+                    },
+                    gotIt() {
+                        if (this.cards.length === 1) {
+                            return alert("Well done!");
+                        }
+                        this.cards.splice(this.index, 1);
+                        if (!this.currentCard) {
+                            this.index = 0;
+                        }
+                        this.flipped = false;
+                    },
+                    again() {
+                        this.currentCard.isRepeat = true;
+                        this.move(1);
+                    }
+                },
+                computed: {
+                    currentCard() {
+                        return this.cards[this.index];
+                    },
+                    front() {
+                        return this.currentCard.front;
+                    },
+                    back() {
+                        return this.currentCard.back;
+                    },
+                    isRepeat() {
+                        return this.currentCard.isRepeat;
+                    }
+                }
+            };
+
+            const app = Vue.createApp(FlashCardApp).mount('#app');
+        </script>
+    </body>
+</html>

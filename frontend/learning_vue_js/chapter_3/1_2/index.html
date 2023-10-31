@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Flash Card App</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-text="deckName"></h1>
+
+            <div @click="flipped = !flipped" class="card">
+                <!-- Unlike `v-if/else-if/else`, `v-show` simply hides
+                    the element rather than creating/destroying it.
+                    `v-show` can't be used with `v-else` -->
+                <!-- `v-cloak` has no effect by itself, but can be used
+                    to hide elements with CSS. It will only exist in the
+                    DOM element until the vue instance has compiled.
+                    In style.css, there is a `[v-cloak]` attribute style
+                    defined that sets `display: none`. -->
+                <h2 v-cloak v-show="!flipped" v-text="front">{{ front }}</h2>
+                <div v-show="flipped" v-html="back"></div>
+            </div>
+
+            <div class="navigation">
+                <button @click="move(-1)" type="button">&#8592;</button>
+
+                <button @click="move(1)" type="button">&#8594;</button>
+            </div>
+
+            <a :href="readMoreUrl">Read more</a>
+        </div>
+
+        <script src="data.js"></script>
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: 'Vue.js Fundamentals',
+                        cards,
+                        index: 0,
+                        flipped: false,
+                        readMoreUrl: 'https://v3.vuejs.org/guide'
+                    };
+                },
+                methods: {
+                    move(change) {
+                        // Rather than stopping at the bounds of the collection of cards:
+                        // Update the index
+                        // Then check against the bounds of the collection, and wrap accordingly, if necessary
+                        this.index += change;
+                        if (0 > this.index) {
+                            this.index = this.cards.length - 1;
+                        } else if (this.index > this.cards.length - 1) {
+                            this.index = 0;
+                        }
+                        this.flipped = false;
+                    }
+                },
+                computed: {
+                    front() {
+                        return this.cards[this.index].front;
+                    },
+                    back() {
+                        /* Loop to manually insert delay for demostration of
+                         * `v-if/else-if/else` vs `v-show`.
+                         *
+                         * Using `v-if/else-if/else` this delay occurs on initial
+                         * card flip of each card, then is cached (because it's
+                         * a computed property).
+                         *
+                         * When using `v-show`, this delay occurs on page load and
+                         * switching cards and, again, cached until the page is
+                         * reloaded or the property needs to be recomputed due to
+                         * the value of `index` changing. */
+                        for (let index = 0; index < 3e9; index++) {}
+                        return this.cards[this.index].back;
+                    }
+                }
+            };
+
+            const app = Vue.createApp(FlashCardApp).mount('#app');
+        </script>
+    </body>
+</html>

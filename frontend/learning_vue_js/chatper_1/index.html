@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Flash Card App</title>
+    </head>
+    <body>
+
+        <div id="app">
+            <!-- Same output as using {{ deckName }} but doesn't flash the "{{ }}" prior to Vue rendering the appropriate text -->
+            <h1 v-text="deckName"></h1>
+
+            <!-- @ is a shortcut for v-on: -->
+            <div class="card" @click="flipped = !flipped">
+                <!-- "v-text" will escape html in the text -->
+                <h2 v-text="flipped ? '' : cards[index].front"></h2>
+                <!-- "v-html" will render the html -->
+                <div v-html="flipped ? cards[index].back : ''"></div>
+            </div>
+
+            <div class="navigation">
+                <!-- &#8594 is a back/left arrow -->
+                <button @click="move(-1)" type="button">&#8592</button>
+                <!-- &#8594 is a forward/right arrow -->
+                <button @click="move(1)" type="button">&#8594</button>
+            </div>
+
+            <!-- :href is a shortcut to v-bind:href, more generally, :some-attribute == v-bind:some-attribute -->
+            <a :href="readMoreUrl">Read More</a>
+        </div>
+
+        <script src="data.js"></script>
+        <!-- Use a CDN to provide Vue -->
+        <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script>
+        <!-- Define and create a Vue app -->
+        <script>
+            const FlashCardApp = {
+                data() {
+                    return {
+                        deckName: "Vue.js Fundamentals",
+                        cards, // <-- is a shortcut for `cards: cards`
+                        index: 0,
+                        flipped: false,
+                        readMoreUrl: "https:://v3.vuejs.org/guide",
+                        userInput: "default"
+                    };
+                },
+                methods: {
+                    move(change) {
+                        // Rather than stopping at the bounds of the collection of cards:
+                        // Update the index
+                        // Then check against the bounds of the collection, and wrap accordingly, if necessary
+                        this.index += change;
+                        if (0 > this.index) {
+                            this.index = this.cards.length - 1;
+                        } else if (this.index > this.cards.length - 1) {
+                            this.index = 0;
+                        }
+                        this.flipped = false;
+                    }
+                }
+            };
+
+            const app = Vue.createApp(FlashCardApp).mount("#app");
+        </script>
+    </body>
+</html>
