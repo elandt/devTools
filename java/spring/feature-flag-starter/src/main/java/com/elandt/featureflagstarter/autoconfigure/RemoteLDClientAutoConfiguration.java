@@ -1,14 +1,15 @@
 package com.elandt.featureflagstarter.autoconfigure;
 
-import com.launchdarkly.sdk.server.LDClient;
-import com.launchdarkly.sdk.server.LDConfig;
-import com.launchdarkly.sdk.server.integrations.Component;
-import com.example.featureflagstarter.properties.LaunchDarklyProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+
+import com.elandt.featureflagstarter.properties.LaunchDarklyProperties;
+import com.launchdarkly.sdk.server.Components;
+import com.launchdarkly.sdk.server.LDClient;
+import com.launchdarkly.sdk.server.LDConfig;
 
 /**
  * Auto-configuration for creating a LaunchDarkly client in remote mode.
@@ -28,10 +29,10 @@ public class RemoteLDClientAutoConfiguration {
     @ConditionalOnMissingBean
     private LDClient ldClient(LaunchDarklyProperties properties) {
         LDConfig config = new LDConfig.Builder()
-                .http(Component.httpConfiguration()
+                .http(Components.httpConfiguration()
                         .proxyHostAndPort(properties.getProxyHost(), properties.getProxyPort())
-                        .proxyAuth(properties.getProxyUser(), properties.getProxyPassword())
-                        .build())
+                        .proxyAuth(Components.httpBasicAuthentication(properties.getProxyUser(), properties.getProxyPassword()))
+                        )
                 .build();
         return new LDClient(properties.getSdkKey(), config);
     }

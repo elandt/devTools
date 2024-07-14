@@ -1,12 +1,12 @@
 package com.elandt.featureflagstarter.autoconfigure;
 
-import com.launchdarkly.sdk.server.LDClient;
-import com.example.featureflagstarter.properties.LaunchDarklyProperties;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.launchdarkly.sdk.server.LDClient;
 
 @ActiveProfiles("LOCAL")
 class LocalLDClientAutoConfigurationTest {

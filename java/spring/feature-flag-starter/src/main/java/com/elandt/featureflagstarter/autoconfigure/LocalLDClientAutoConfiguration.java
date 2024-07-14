@@ -1,14 +1,16 @@
 package com.elandt.featureflagstarter.autoconfigure;
 
-import com.launchdarkly.sdk.server.LDClient;
-import com.launchdarkly.sdk.server.LDConfig;
-import com.launchdarkly.sdk.server.integrations.FileData;
-import com.example.featureflagstarter.properties.LaunchDarklyProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+
+import com.elandt.featureflagstarter.properties.LaunchDarklyProperties;
+import com.launchdarkly.sdk.server.Components;
+import com.launchdarkly.sdk.server.LDClient;
+import com.launchdarkly.sdk.server.LDConfig;
+import com.launchdarkly.sdk.server.integrations.FileData;
 
 /**
  * Auto-configuration for creating a LaunchDarkly client in local mode.
@@ -30,7 +32,9 @@ public class LocalLDClientAutoConfiguration {
         LDConfig config = new LDConfig.Builder()
                 .dataSource(FileData.dataSource()
                         .filePaths(properties.getLocalFeatureFlagFile())
-                        .build())
+                        .autoUpdate(true)
+                        )
+                .events(Components.noEvents())
                 .build();
         return new LDClient(properties.getSdkKey(), config);
     }
