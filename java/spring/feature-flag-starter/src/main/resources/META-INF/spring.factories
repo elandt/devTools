@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.elandt.featureflagstarter.autoconfigure.LocalLDClientAutoConfiguration,\
+com.elandt.featureflagstarter.autoconfigure.RemoteLDClientAutoConfiguration
