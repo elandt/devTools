@@ -21,3 +21,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Building Full-Stack Apps with React and Spring](https://www.linkedin.com/learning/building-full-stack-apps-with-react-and-spring) - 10/8/2023
 * [Learning Vue.js](https://www.linkedin.com/learning/learning-vue-js-8602681) - 10/30/2023
 * [Vue.js 3 Essential Training](https://www.linkedin.com/learning/vue-js-3-essential-training) - 
+* [Spring 6: Design Patterns](https://www.linkedin.com/learning/spring-6-design-patterns) - 12/26/2024
