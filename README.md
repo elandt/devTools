@@ -23,3 +23,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Vue.js 3 Essential Training](https://www.linkedin.com/learning/vue-js-3-essential-training) - 
 * [Spring 6: Design Patterns](https://www.linkedin.com/learning/spring-6-design-patterns) - 12/26/2024
 * [Spring with GraphQL](https://www.linkedin.com/learning/spring-with-graphql/building-a-graphql-api-with-spring-boot) - 12/27/2024
+* [Advanced Spring: Effective Integration Testing with Spring Boot](https://www.linkedin.com/learning/advanced-spring-effective-integration-testing-with-spring-boot) - 12/30/2024
