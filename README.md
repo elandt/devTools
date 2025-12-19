@@ -25,3 +25,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Spring with GraphQL](https://www.linkedin.com/learning/spring-with-graphql/building-a-graphql-api-with-spring-boot) - 12/27/2024
 * [Advanced Spring: Effective Integration Testing with Spring Boot](https://www.linkedin.com/learning/advanced-spring-effective-integration-testing-with-spring-boot) - 12/30/2024
 * [Performance Tuning in Spring Apps](https://www.linkedin.com/learning/performance-tuning-in-spring-apps/performance-tuning-in-spring) - 12/15/2025
+* [Having Difficult Conversations](https://www.linkedin.com/learning/having-difficult-conversations-2018/difficult-conversations-21028834) - 12/19/2025
