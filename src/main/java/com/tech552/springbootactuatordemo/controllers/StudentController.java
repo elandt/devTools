@@ -2,6 +2,10 @@ package com.tech552.springbootactuatordemo.controllers;
 
 import com.tech552.springbootactuatordemo.models.Student;
 import com.tech552.springbootactuatordemo.services.StudentService;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +15,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1")
 public class StudentController {
+
+    Counter hitCounter;
+
+    public StudentController(MeterRegistry registry) {
+        hitCounter = Counter.builder("hit_counter").description("Number of Hits").register(registry);
+    }
 
     @Autowired
     private StudentService studentService;
@@ -22,6 +32,7 @@ public class StudentController {
 
     @GetMapping("/student")
     public List<Student> getAllStudents(){
+        hitCounter.increment();
         return studentService.getAllStudents();
     }
 

@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 5s # Scrape metrics every 5 seconds
+  evaluation_interval: 5s # Evaluate rules every 5 seconds
+
+rule_files:
+  # - one_rule.yml
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: [127.0.0.1:9090]
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      # Regardless of which target is used, when clicking the link to the actuator endpoint on the `Status > Target health` page,
+      # the link takes you to a url that won't resolve in the browser, so you'll need to replace the root of the url with `localhost`
+      # This is a browser issue ONLY. Prometheus is able to scrape metric data as expected
+      # host and port if using Prometheus within the devcontainer with `prometheus --config.file="spring-boot-actuator/src/main/resources/prometheus.yml"` command
+      - targets: ['localhost:8080'] 
+      # host and port if running Prometheus in a container outside of the devcontainer
+      # - targets: ['host.docker.internal:8080'] # host and port if running Prometheus in a container outside of the devcontainer
+    basic_auth:
+      username: "admin"
+      password: "admin"
