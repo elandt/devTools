@@ -1,4 +1,5 @@
 {
+  "image": "mcr.microsoft.com/devcontainers/universal:linux",
   "hostRequirements": {
     "cpus": 8,
     "memory": "32gb"
@@ -6,7 +7,7 @@
   "overrideCommand": false,
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-contrib/features/kind:1": {}
+    "ghcr.io/devcontainers-extra/features/kind:1": {}
   },
   "mounts": [
     "source=var-lib-docker,target=/var/lib/docker,type=volume",
@@ -14,7 +15,7 @@
   ],
   "customizations": {
     "vscode": {
-      "extensions": [    
+      "extensions": [
         "GitHub.github-vscode-theme",
         "vscjava.vscode-java-pack",
         "vscjava.vscode-java-test",
