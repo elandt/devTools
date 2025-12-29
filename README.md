@@ -28,3 +28,4 @@ This repo contains exercise files with notes from various online courses. As I p
 * [Having Difficult Conversations](https://www.linkedin.com/learning/having-difficult-conversations-2018/difficult-conversations-21028834) - 12/19/2025
 * [Advanced Spring: Spring Boot Actuator](https://www.linkedin.com/learning/advanced-spring-spring-boot-actuator) - 12/22/2025
 * [Advanced Spring: Application Events](https://www.linkedin.com/learning/advanced-spring-application-events) - 12/24/2025
+* [Spring Boot Observability: Deep Dive into Logging, Metrics, and Tracing](https://www.linkedin.com/learning/spring-boot-observability-deep-dive-into-logging-metrics-and-tracing) - 12/29/2025
