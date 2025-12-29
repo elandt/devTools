@@ -1,9 +1,9 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:linux",
-  "hostRequirements": {
-    "cpus": 8,
-    "memory": "32gb"
-  },
+  // "hostRequirements": {
+  //   "cpus": 8,
+  //   "memory": "32gb"
+  // },
   "overrideCommand": false,
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
